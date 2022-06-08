@@ -23,8 +23,7 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-    @OneToMany()
-    @JoinColumn(name = "ID_USER")
+    @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
 }

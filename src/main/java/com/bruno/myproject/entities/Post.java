@@ -15,6 +15,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "tb_post")
 public class Post implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
