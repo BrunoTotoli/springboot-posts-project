@@ -1,5 +1,6 @@
 package com.bruno.myproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,18 @@ public class Comment {
     private Long id;
     private String text;
     private Instant date;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_comment_id")
+    private User user;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "post_comments_id")
+    private Post post;
+
+    public String getNameUser() {
+        return user.getName() + "  Id:" + user.getId();
+    }
 }

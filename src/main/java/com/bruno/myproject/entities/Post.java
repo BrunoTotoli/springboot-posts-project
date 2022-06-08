@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +28,7 @@ public class Post implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "ID_USER")
     private User user;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 }
