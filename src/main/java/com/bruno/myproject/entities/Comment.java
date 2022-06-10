@@ -30,7 +30,7 @@ public class Comment {
     @JoinColumn(name = "post_comments_id")
     private Post post;
 
-    public String getNameUser() {
-        return user.getName() + "  Id:" + user.getId();
+    public Long getAuthorID() {
+        return user.getId();
     }
 }
