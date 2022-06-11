@@ -1,9 +1,12 @@
 package com.bruno.myproject.services;
 
 import com.bruno.myproject.entities.User;
-import com.bruno.myproject.entities.exceptions.ResourceNotFoundException;
+import com.bruno.myproject.services.exceptions.DatabaseException;
+import com.bruno.myproject.services.exceptions.ResourceNotFoundException;
 import com.bruno.myproject.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +33,13 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("User Id: " + id + " Not Found");
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Referential integrity constraint violation");
+        }
     }
 
 }

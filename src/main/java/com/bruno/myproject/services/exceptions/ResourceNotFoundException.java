@@ -1,4 +1,4 @@
-package com.bruno.myproject.entities.exceptions;
+package com.bruno.myproject.services.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
