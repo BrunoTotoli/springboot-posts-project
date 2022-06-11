@@ -4,6 +4,7 @@ import com.bruno.myproject.entities.Comment;
 import com.bruno.myproject.services.exceptions.ResourceNotFoundException;
 import com.bruno.myproject.repositories.CommentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,11 @@ public class CommentService {
     }
 
     public void deleteById(Long id) {
-        commentRepository.deleteById(id);
+        try {
+            commentRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Comment Id: " + id + " Not Found");
+        }
     }
 
 
