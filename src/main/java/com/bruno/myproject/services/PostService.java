@@ -3,6 +3,7 @@ package com.bruno.myproject.services;
 
 import com.bruno.myproject.entities.Post;
 import com.bruno.myproject.entities.User;
+import com.bruno.myproject.entities.exceptions.ResourceNotFoundException;
 import com.bruno.myproject.repositories.PostRepository;
 import com.bruno.myproject.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class PostService {
 
     public Post findById(Long id) {
         Optional<Post> post = postRepository.findById(id);
-        return post.get();
+        return post.orElseThrow(() -> new ResourceNotFoundException("Post Id: " + id + " Not Found"));
     }
 
     public void deleteById(Long id) {
