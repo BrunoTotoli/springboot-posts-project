@@ -1,6 +1,7 @@
 package com.bruno.myproject.services;
 
 import com.bruno.myproject.entities.User;
+import com.bruno.myproject.entities.exceptions.ResourceNotFoundException;
 import com.bruno.myproject.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.get();
+        return user.orElseThrow(() -> new ResourceNotFoundException("User Id: " + id + " Not Found"));
     }
 
     public void deleteById(Long id) {
